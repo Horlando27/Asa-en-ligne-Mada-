@@ -882,3 +882,260 @@
     }
     
       
+      /* ===== LOADER ===== */
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid var(--primary);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 2s linear infinite;
+      margin: 20px auto;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* ===== NOTIFICATION ===== */
+    .notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 25px;
+      background: var(--success);
+      color: white;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      z-index: 2000;
+      animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-out 2.7s forwards;
+    }
+    
+    .notification.error {
+      background: var(--danger);
+    }
+    
+    @keyframes slideIn {
+      from { top: -100px; opacity: 0; }
+      to { top: 20px; opacity: 1; }
+    }
+    
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; visibility: hidden; }
+    }
+    
+    /* ===== FORMATION BUTTON ===== */
+    .formation-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: white !important;
+      text-decoration: none !important;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      box-shadow: 
+          0 4px 6px rgba(37, 117, 252, 0.3),
+          0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .formation-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 
+          0 7px 14px rgba(37, 117, 252, 0.4),
+          0 3px 6px rgba(0, 0, 0, 0.12);
+      background: linear-gradient(135deg, #5d0fc5 0%, #1c6df7 100%);
+    }
+
+    .formation-btn:active {
+      transform: translateY(1px);
+      box-shadow: 
+          0 2px 4px rgba(37, 117, 252, 0.4),
+          0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .formation-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+      );
+      transition: left 0.7s ease-in-out;
+    }
+
+    .formation-btn:hover::after {
+      left: 100%;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 1rem;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background 0.3s ease;
+    }
+    .orange { background-color: #f47d30; }
+    .orange:hover { background-color: #d4621f; }
+    .mvola { background-color: #2c3e50; }
+    .mvola:hover { background-color: #1a252f; }
+    .airtel { background-color: #e60000; }
+    .airtel:hover { background-color: #b20000; }
+  </style>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    
+  <!-- Section d'inscription -->
+  <div id="registration-section" class="container">
+    <h2>Inscription</h2>
+    <form id="registration-form">
+      <div class="form-group">
+        <label for="full-name">Nom complet</label>
+        <input type="text" id="full-name" placeholder="Votre nom complet" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="reg-email">Adresse email</label>
+        <input type="email" id="reg-email" placeholder="Votre adresse email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="reg-password">Mot de passe</label>
+        <input type="password" id="reg-password" placeholder="Créez un mot de passe" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="reg-confirm-password">Confirmer mot de passe</label>
+        <input type="password" id="reg-confirm-password" placeholder="Confirmez votre mot de passe" required>
+      </div>
+      
+      <button type="submit">S'inscrire</button>
+    </form>
+    <div class="link">
+      Déjà un compte ? <a href="#" onclick="showLoginSection()">Connectez-vous</a>
+    </div>
+  </div>
+  
+  <!-- Section de connexion initiale -->
+  <div id="login-section" class="container hidden">
+    <h2>Connexion</h2>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="login-email">Adresse email</label>
+        <input type="email" id="login-email" placeholder="Votre adresse email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="login-password">Mot de passe</label>
+        <input type="password" id="login-password" placeholder="Votre mot de passe" required>
+      </div>
+      
+      <button type="submit">Se connecter</button>
+    </form>
+    <div class="link">
+      <a href="#" onclick="resetPassword()">Mot de passe oublié ?</a>
+    </div>
+    <div class="link">
+      Pas de compte ? <a href="#" onclick="showRegistrationSection()">S'inscrire</a>
+    </div>
+  </div>
+  
+  <!-- Section fampahafantarana fandoavana -->
+  <div id="payment-instructions" class="container hidden">
+    <h2>Effectuez votre paiement</h2>
+    <p>Salama tompoko 🥰 mba hafahanao misitraka ny fampianarana ato aminay dia aloavy ny écolage  <strong>1000 Ar</strong>, Misafidy iray amin'ny ireo service ireo andefasana ilay écolage 1000ar:</p>
+    
+    <div class="card mt-20">
+      <div class="form-group">
+        <div class="payment-method">
+          <i class="fas fa-user fa-2x mb-10" style="color: var(--primary);"></i>
+          <h3>RAVELOMANANTSOA Urmin</h3>
+          <a class="btn mvola"
+     href="tel:%23111%2A1%2A2%2A0323911654%2A1000%2A2%2A12%23">
+    Payer MVola
+          </a>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="payment-method">
+          <i class="fas fa-user fa-2x mb-10" style="color: var(--primary);"></i>
+          <h3>RAVELOMANANTSOA urmin</h3>
+          <a class="btn orange"
+     href="tel:%23144%2A1%2A1%2A0323911654%2A0323911654%2A1000%23">
+    Payer Orange Money
+          </a>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="payment-method">
+          <i class="fas fa-user fa-2x mb-10" style="color: var(--primary);"></i>
+          <h3>RANAIVOSON Angelo</h3>
+         <a class="btn airtel"
+     href="tel:0333635111">
+    Payer Airtel Money
+         </a>
+        </div>
+      </div>
+    </div>
+    
+    <button onclick="showPaymentProofForm()" class="btn-accent">J'ai payé</button>
+  </div>
+  
+  <!-- Formulaire de preuve de paiement -->
+  <div id="payment-proof" class="container hidden">
+    <h2>Preuve de paiement</h2>
+    
+    <div class="form-group">
+      <label for="proof-fullname">Nom complet</label>
+      <input type="text" id="proof-fullname" placeholder="Votre nom complet" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="proof-phone">Numéro de téléphone utilisé</label>
+      <input type="text" id="proof-phone" placeholder="Votre numéro de téléphone" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="proof-amount">Montant à payer</label>
+      <input type="number" id="proof-amount" placeholder="Montant envoyé" required>
+    </div>
+    
+    <button onclick="submitPaymentProof()">Envoyer la preuve</button>
+  </div>
+  
+  <!-- Notification de paiement en attente -->
+  <div id="pending-verification" class="container hidden">
+    <div class="text-center">
+      <i class="fas fa-clock fa-3x mb-20" style="color: var(--accent);"></i>
+      <h2>En attente de vérification</h2>
+      <p>Votre demande de paiement est en attente de vérification par l'administration.</p>
+      <p>Vous recevrez une notification dès que votre compte sera activé.</p>
+    </div>
+  </div>
+  
