@@ -1138,4 +1138,501 @@
       <p>Vous recevrez une notification dès que votre compte sera activé.</p>
     </div>
   </div>
+  <!-- Notification d'activation -->
+  <div id="activation-notification" class="container hidden">
+    <div class="text-center">
+      <i class="fas fa-check-circle fa-3x mb-20" style="color: var(--success);"></i>
+      <h2>Paiement confirmé</h2>
+      
+      <div id="admin-notification" class="card mt-20 hidden">
+        <p id="admin-notification-text">Vous avez un message de l'admin.</p>
+        <div class="mt-20">
+          <button onclick="viewAdminMessage()" class="btn-accent">Voir le message</button>
+          <button onclick="dismissAdminMessage()" class="btn" style="margin-top: 10px;">Fermer</button>
+        </div>
+      </div>
+      
+      <div class="card mt-20">
+        <p id="activation-code-container">Voici votre code d'activation :</p>
+        <h3 id="user-activation-code" style="letter-spacing: 3px; font-size: 24px; color: var(--primary);">ASA-XXXX-XXXX</h3>
+        <p class="mt-10">Conservez ce code précieusement pour accéder à votre compte.</p>
+      </div>
+      
+      <button onclick="showFinalActivationForm()" class="mt-20">Connectez-vous</button>
+    </div>
+  </div>
   
+  <!-- Formulaire final d'activation -->
+  <div id="final-activation-form" class="container hidden">
+    <h2>Connexion - Activation</h2>
+    <form id="final-activation-form">
+      <div class="form-group">
+        <label for="final-email">Adresse email</label>
+        <input type="email" id="final-email" placeholder="Votre adresse email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="final-password">Mot de passe</label>
+        <input type="password" id="final-password" placeholder="Votre mot de passe" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="final-activation-code">Code d'activation</label>
+        <input type="text" id="final-activation-code" placeholder="Votre code d'activation" required>
+      </div>
+      
+      <button type="submit">Activer le compte</button>
+    </form>
+  </div>
+  
+  <!-- Page d'accueil -->
+  <div id="homepage" class="hidden">
+    <!-- Navigation -->
+    <div class="home-nav-wrapper">
+      <div class="home-nav">
+        <button onclick="showSection('asaMampiasaVola')">
+          <i>🏘️</i>
+          <span>Asa Premium</span>
+        </button>
+        <button onclick="showSection('asaGratuit')">
+          <i>💼</i>
+          <span>Asa Gratuit</span>
+        </button>
+        <button onclick="showSection('formationTrading')">
+          <i>🔳</i>
+          <span>Formation</span>
+        </button>
+        <button onclick="showSection('transaction')">
+          <i>💵</i>
+          <span>Transactions</span>
+        </button>
+        <button onclick="showSection('groupDiscussion')">
+          <i>💬</i>
+          <span>Discussion</span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Contenu -->
+    <div id="homepage-content">
+      <div id="asaMampiasaVola" class="home-section active">
+        <button id="darkModeToggle" class="dark-mode-btn">🌙</button>
+        
+        <!-- Section Profil, Publication, Reactions & Private Chat -->
+        <div class="home-content">
+          <h1>Asa en Ligne</h1>
+          <i id="settings-btn" class="fa-solid fa-cog" title="Paramètres"></i>
+          
+          <div id="settings-modal">
+            <h3>Paramètres</h3>
+            <section>
+              <h4>1. Ajouter votre information</h4>
+              
+              <div class="cover-preview">
+                <span>Photo de couverture</span>
+              </div>
+              <label for="cover-photo-input">Photo de couverture:</label>
+              <input type="file" id="cover-photo-input" accept="image/*">
+              
+              <div class="profile-preview">
+                <span>Photo de profil</span>
+              </div>
+              <label for="profile-photo-input">Photo de profil:</label>
+              <input type="file" id="profile-photo-input" accept="image/*">
+              
+              <label for="info-name">Nom complet:</label>
+              <input type="text" id="info-name" placeholder="Votre nom">
+              
+              <label for="info-email">Email:</label>
+              <input type="email" id="info-email" placeholder="Votre email">
+              
+              <label for="info-phone">Téléphone (WhatsApp):</label>
+              <input type="tel" id="info-phone" placeholder="Votre numéro">
+              
+              <label for="info-fb">Lien Facebook:</label>
+              <input type="url" id="info-fb" placeholder="Votre profil Facebook">
+              
+              <label for="info-gender">Genre:</label>
+              <select id="info-gender">
+                <option value="">Sélectionner</option>
+                <option value="homme">Homme</option>
+                <option value="femme">Femme</option>
+                <option value="autre">Autre</option>
+              </select>
+              
+              <button id="save-info-btn" class="mt-20">Enregistrer</button>
+            </section>
+            <hr>
+            <section>
+              <h4>2. Télécharger l'application</h4>
+              <a href="https://drive.google.com/uc?export=download&id=11i4c-ztONm4DoHK1YNaJHJISte9O4Xfb" download class="btn">
+                Télécharger APK
+              </a>
+            </section>
+            <hr>
+            <section>
+              <h4>3. Mode sombre</h4>
+              <label for="dark-toggle">Activer le mode sombre:</label>
+              <input type="checkbox" id="dark-toggle">
+            </section>
+            <hr>
+            <section>
+              <h4>4. Langue</h4>
+              <label for="language-select">Changer de langue:</label>
+              <select id="language-select">
+                <option value="fr">Français</option>
+                <option value="mg">Malagasy</option>
+                <option value="en">English</option>
+              </select>
+            </section>
+            <hr>
+            <section>
+              <h4>5. Autres</h4>
+              <button id="share-btn" class="btn btn-accent mb-10">
+                <i class="fas fa-share-alt"></i> Partager le lien
+              </button>
+              <button id="logout-btn" class="btn btn-danger">
+                <i class="fas fa-sign-out-alt"></i> Se déconnecter
+              </button>
+            </section>
+          </div>
+          
+          <section id="form-section">
+            <div id="auth-status" class="mb-20"></div>
+            <textarea id="description" rows="3" placeholder="Ahoana ny hevitrao?…"></textarea>
+            <input type="url" id="fb-link" placeholder="Lien Facebook…" class="mt-10">
+            <button onclick="postData()" class="mt-20">Publier</button>
+          </section>
+          <hr class="mt-20">
+          <div id="posts" class="mt-20"></div>
+        </div>
+        
+        <!-- Bouton WhatsApp -->
+        <a href="https://drive.google.com/uc?export=download&id=11i4c-ztONm4DoHK1YNaJHJISte9O4Xfb" download class="download-btn">
+          <i class="fab fa-android download-icon"></i>
+          Télécharger l'application
+        </a>
+        
+        <div class="section-item">
+          <i class="fas fa-star fa-2x mb-10" style="color: var(--accent);"></i>
+          <h3>Asa Premium 1</h3>
+          <p>Opportunités professionnelles avec revenus garantis</p>
+          <button class="mt-10">Découvrir</button>
+        </div>
+        
+        <div class="section-item">
+          <i class="fas fa-gem fa-2x mb-10" style="color: var(--accent);"></i>
+          <h3>Asa Premium 2</h3>
+          <p>Collaborations exclusives pour membres actifs</p>
+          <button class="mt-10">Découvrir</button>
+        </div>
+      </div>
+      
+      <div id="asaGratuit" class="home-section">
+        <div class="section-item">
+          <i class="fas fa-tasks fa-2x mb-10" style="color: var(--primary);"></i><br><br><br>
+          <h3>Asa Gratuit 1</h3>
+          <p>Opportunités sans investissement initial</p>
+          <a href="https://ipweb-formation.vercel.app/" class="formation-btn">voir la formation</a>
+          <a href="https://www.ipweb.pro/?Horlando27" class="formation-btn">S'inscrire ici</a>
+        </div>
+        
+        <div class="section-item">
+          <i class="fas fa-users fa-2x mb-10" style="color: var(--primary);"></i>
+          <h3>Asa Gratuit 2</h3>
+          <p>Missions accessibles à tous les membres</p>
+         <a href="https://asa-en-ligne-gratuit-2.vercel.app/" class="formation-btn">voir la formation 2</a>
+          <a href="https://timebucks.com/?refID=226477254" class="formation-btn">S'inscrire ici</a>
+        </div>
+      </div>
+      
+      <div id="formationTrading" class="home-section">
+        <div class="section-item">
+          <i class="fas fa-book fa-2x mb-10" style="color: var(--success);"></i><br><br>
+          <h3>CREER LES COMPTES RÉSEAUX SOCIAUX</h3>
+          <p>Cliquez sur le bouton voir les vidéos</p>
+          <a href="https://les-comptes-r-seaux-sociaux.vercel.app/" class="formation-btn">voir les vidéos</a>
+        </div>
+        
+        <div class="section-item">
+          <i class="fas fa-chart-line fa-2x mb-10" style="color: var(--success);"></i>
+          <h3>CRÉATION DU PORTEFEUILLE CRIPTO</h3>
+          <p>Nous enseignons aussi la création des comptes portefeuilles électroniques comme: METAMASK, BINANCE,... Cliquez sur le bouton voir les vidéos lorsque la vidéo.</p>
+          <button class="mt-10">En attente d'installation </button>
+        </div>
+      </div>
+      
+      <div id="transaction" class="home-section">
+        <div class="section-item">
+          <i class="fas fa-wallet fa-2x mb-10" style="color: var(--accent);"></i><br><br>
+          <h3>Transaction</h3>
+          <p>Retrait d'argent sécurisé</p>
+          
+          <p>Avant de retirer de l'argent, veuillez contacter le service client </p>
+          <a href="https://demande-du-retrait.vercel.app/" target="_blank">
+            <button class="mt-10">RETRAIT D'ARGENT</button>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Section Discussion de groupe -->
+      <div id="groupDiscussion" class="home-section">
+        <div class="group-discussion-container">
+          <div class="group-header">
+            <h3>Discussion de Groupe</h3>
+            <p>Échangez avec tous les membres</p>
+          </div>
+          
+          <div class="group-messages" id="group-messages">
+            <div class="no-chat-selected">
+              <p>Chargement des messages...</p>
+            </div>
+          </div>
+          
+          <div id="name-input-section" class="name-input-container">
+            <input type="text" id="user-name" placeholder="Entrez votre nom pour participer" required>
+            <button onclick="saveUserName()">Enregistrer mon nom</button>
+          </div>
+          
+          <div id="message-input-section" class="group-input-container" style="display: none;">
+            <textarea id="group-message-input" class="group-input" placeholder="Tapez votre message..." disabled></textarea>
+            <button id="group-send-btn" class="group-send-btn" onclick="sendGroupMessage()">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Service client -->
+  <a href="https://service-client-asa-en-ligne-site-we.vercel.app/" class="service-client-icon" target="_blank" title="Service Client">
+    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png" alt="Service Client" />
+  </a>  
+
+  <script>
+    // Configuration Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCK4HqGSjYRT2jFNhAvniSWIzhDvEb2qAQ",
+      authDomain: "asa-en-ligne.firebaseapp.com",
+      projectId: "asa-en-ligne",
+      storageBucket: "asa-en-ligne.appspot.com",
+      messagingSenderId: "58359363245",
+      appId: "1:58359363245:web:ca5969776ce9cd86aef824",
+      measurementId: "G-MRVHVWPV71"
+    };
+
+    // Initialiser Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Variables globales
+    let currentUser = null;
+    let storedAdminMessage = "";
+    let userName = "";
+
+    // ===== FONCTIONS DE NAVIGATION =====
+    function showRegistrationSection() {
+      hideAllSections();
+      document.body.classList.remove('homepage-active');
+      document.getElementById("registration-section").classList.remove("hidden");
+    }
+    
+    function showLoginSection() {
+      hideAllSections();
+      document.body.classList.remove('homepage-active');
+      document.getElementById("login-section").classList.remove("hidden");
+    }
+    
+    function showPaymentInstructions() {
+      hideAllSections();
+      document.body.classList.remove('homepage-active');
+      document.getElementById("payment-instructions").classList.remove("hidden");
+    }
+    
+    function showPaymentProofForm() {
+      hideAllSections();
+      document.body.classList.remove('homepage-active');
+      document.getElementById("payment-proof").classList.remove("hidden");
+    }
+    
+    function showPendingVerification() {
+      hideAllSections();
+      document.body.classList.remove('homepage-active');
+      document.getElementById("pending-verification").classList.remove("hidden");
+    }
+    
+    function showActivationNotification() {
+      hideAllSections();
+      document.body.classList.remove('homepage-active');
+      document.getElementById("activation-notification").classList.remove("hidden");
+    }
+    
+    function showFinalActivationForm() {
+      hideAllSections();
+      document.body.classList.remove('homepage-active');
+      document.getElementById("final-activation-form").classList.remove("hidden");
+    }
+    
+    function showHomepage() {
+      hideAllSections();
+      document.body.classList.add('homepage-active');
+      document.getElementById("homepage").classList.remove("hidden");
+    }
+    
+    function hideAllSections() {
+      const sections = [
+        "registration-section", "login-section", "payment-instructions", 
+        "payment-proof", "pending-verification", "activation-notification", 
+        "final-activation-form", "homepage"
+      ];
+      
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add("hidden");
+      });
+    }
+    
+    // ===== FONCTIONS D'AUTHENTIFICATION FIREBASE =====
+    // Inscription
+    document.getElementById('registration-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const fullName = document.getElementById("full-name").value.trim();
+      const email = document.getElementById("reg-email").value.trim();
+      const password = document.getElementById("reg-password").value;
+      const confirmPassword = document.getElementById("reg-confirm-password").value;
+      
+      if (password !== confirmPassword) {
+        showNotification("Les mots de passe ne correspondent pas.", true);
+        return;
+      }
+      
+      try {
+        // Créer l'utilisateur avec Firebase Auth
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+        
+        // Générer un code d'activation
+        const activationCode = "ASA-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+        
+        // Stocker les informations dans Firestore
+        await db.collection("users").doc(user.uid).set({
+          fullName,
+          email,
+          paymentStatus: "not_paid",
+          activationCode,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        
+        showNotification("Inscription réussie! Veuillez effectuer le paiement.");
+        setTimeout(() => {
+          showPaymentInstructions();
+        }, 2000);
+      } catch (error) {
+        showNotification(`Erreur: ${error.message}`, true);
+      }
+    });
+    
+    // Connexion
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value;
+      
+      try {
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+        
+        // Récupérer les données utilisateur depuis Firestore
+        const userDoc = await db.collection("users").doc(user.uid).get();
+        
+        if (userDoc.exists) {
+          const userData = userDoc.data();
+          
+          // Rediriger selon le statut de paiement
+          if (userData.paymentStatus === "confirmed") {
+            showNotification("Connexion réussie!");
+            setTimeout(() => {
+              showHomepage();
+            }, 1500);
+          } else if (userData.paymentStatus === "pending") {
+            showNotification("Votre paiement est en cours de vérification.");
+            setTimeout(() => {
+              showPendingVerification();
+            }, 1500);
+          } else {
+            showNotification("Veuillez effectuer le paiement.");
+            setTimeout(() => {
+              showPaymentInstructions();
+            }, 1500);
+          }
+        } else {
+          showNotification("Aucune donnée utilisateur trouvée.", true);
+        }
+      } catch (error) {
+        showNotification(`Erreur: ${error.message}`, true);
+      }
+    });
+    
+    // Réinitialisation du mot de passe
+    async function resetPassword() {
+      const email = document.getElementById("login-email").value.trim();
+      
+      if (!email) {
+        showNotification("Veuillez entrer votre adresse email.", true);
+        return;
+      }
+      
+      try {
+        await auth.sendPasswordResetEmail(email);
+        showNotification("Un email de réinitialisation a été envoyé.");
+      } catch (error) {
+        showNotification(`Erreur: ${error.message}`, true);
+      }
+    }
+    
+    // Preuve de paiement
+    async function submitPaymentProof() {
+      const proofFullName = document.getElementById("proof-fullname").value.trim();
+      const proofPhone = document.getElementById("proof-phone").value.trim();
+      const proofAmount = document.getElementById("proof-amount").value.trim();
+      
+      if (!proofFullName || !proofPhone || !proofAmount) {
+        showNotification("Veuillez remplir tous les champs.", true);
+        return;
+      }
+      
+      try {
+        const user = auth.currentUser;
+        if (!user) {
+          showNotification("Veuillez vous connecter d'abord.", true);
+          return;
+        }
+        
+        // Enregistrer la preuve de paiement dans Firestore
+        await db.collection("paymentProofs").add({
+          userId: user.uid,
+          fullName: proofFullName,
+          phone: proofPhone,
+          amount: proofAmount,
+          status: "pending",
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        
+        // Mettre à jour le statut de l'utilisateur
+        await db.collection("users").doc(user.uid).update({
+          paymentStatus: "pending"
+        });
+        
+        showNotification("Votre preuve de paiement a été envoyée.");
+        setTimeout(() => {
+          showPendingVerification();
+        }, 1500);
+      } catch (error) {
+        showNotification(`Erreur: ${error.message}`, true);
+      }
+    }
+    
